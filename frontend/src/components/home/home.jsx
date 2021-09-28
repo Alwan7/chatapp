@@ -1,19 +1,27 @@
-import React, { useState } from "react";
-import "./home.css";
+import React, { useState, useEffect } from "react";
+import "./home.scss";
 import { Link } from "react-router-dom";
 
 function Homepage({ socket }) {
   const [username, setusername] = useState("");
+  
+  useEffect(() => {
+  // storing input name
+  localStorage.setItem("name", JSON.stringify(username));
+  }, [username]);
   
 
   const sendData = () => {
     if (username !== "" ) {
       socket.emit("joinRoom", { username});
     } else {
-      alert("username and roomname are must !");
+      alert("username are must !");
       window.location.reload();
     }
   };
+  const saved = localStorage.getItem("username");
+  const initialValue = JSON.parse(saved);
+  
 
   return (
     <div className="joinOuterContainer">
@@ -22,7 +30,7 @@ function Homepage({ socket }) {
         <div>
           <input
         className='joinInput'
-        placeholder="Input your user name"
+        placeholder={initialValue}
         value={username}
         onChange={(e) => setusername(e.target.value)}
           ></input>
