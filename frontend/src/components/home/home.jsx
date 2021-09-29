@@ -3,7 +3,8 @@ import "./home.scss";
 import { Link } from "react-router-dom";
 
 function Homepage({ socket }) {
-  const [username, setusername] = useState("");
+  const [username, setusername] = useState(
+    JSON.parse(localStorage.getItem("name")) );
   
   useEffect(() => {
   // storing input name
@@ -19,8 +20,7 @@ function Homepage({ socket }) {
       window.location.reload();
     }
   };
-  const saved = localStorage.getItem("username");
-  const initialValue = JSON.parse(saved);
+  
   
 
   return (
@@ -30,7 +30,7 @@ function Homepage({ socket }) {
         <div>
           <input
         className='joinInput'
-        placeholder={initialValue}
+        placeholder=''
         value={username}
         onChange={(e) => setusername(e.target.value)}
           ></input>
