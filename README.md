@@ -1,3 +1,3 @@
 # chatapp
-frontend test
+a chat app with socket.io 
 
